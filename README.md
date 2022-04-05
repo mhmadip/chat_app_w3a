@@ -1,4 +1,4 @@
-# chat_app_w1  
+# chat_app_w2
 Week 2 Chat App OOP2 ( 5 April 2022)
 
 Our goals for today:
