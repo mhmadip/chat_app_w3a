@@ -1,11 +1,11 @@
 # chat_app_w1  
-Week 1 Chat App OOP2 ( Wed 30 March 2022)
+Week 2 Chat App OOP2 ( 5 April 2022)
 
 Our goals for today:
 
-1- To explore and understand the app structure.
+1- To add Firebase and use Firestore to store chat messages.
 
-2- To add navigation feature by using navigation routes and to be able see the screens on real phone devices or emulators before we make the fully-functional.
+2- Add authentication feature using Firebase Authentication (email and phone).
 
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
