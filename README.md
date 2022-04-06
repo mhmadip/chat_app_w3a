@@ -3,9 +3,9 @@ Week 2 Chat App OOP2 ( 5 April 2022)
 
 Our goals for today:
 
-1- To add Firebase and use Firestore to store chat messages.
+1- Add authentication feature using Firebase Authentication (email and phone).
+2- To add Firebase and use Firestore to store chat messages.
 
-2- Add authentication feature using Firebase Authentication (email and phone).
 
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
