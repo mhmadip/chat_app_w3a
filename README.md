@@ -1,7 +1,15 @@
-# chat_app_w2
+# chat_app_w3
+Week 3 Chat App OOP2 (20 April 2022)
+
+Our goals for this week are:
+
+1- Activiate Chat Screen with some UI improvment for the chat conversation (This is done by using Firestore database to store chat details and Streams to reterive chat details into the Screen).
+2- Change Firestore Database Security Rules to not allow others messsing with our database then test these new rules.
+
+
 Week 2 Chat App OOP2 ( 5 April 2022)
 
-Our goals for today:
+Our goals for last week were done:
 
 1- Add authentication feature using Firebase Authentication (email and phone).
 2- To add Firebase and use Firestore to store chat messages.

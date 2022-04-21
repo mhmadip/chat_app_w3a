@@ -1,4 +1,5 @@
 import 'package:chat_app_w1/screens/chat_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -9,6 +10,9 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String pass;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +31,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.black),
               onChanged: (value) {
                 //Do something with the user input.
+                email = value;
               },
               decoration: const InputDecoration(
                 hintText: 'Enter your email',
@@ -51,8 +57,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.black),
+              obscureText: true,
               onChanged: (value) {
                 //Do something with the user input.
+                pass = value;
               },
               decoration: const InputDecoration(
                 hintText: 'Enter your password',
@@ -81,9 +90,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 borderRadius: BorderRadius.all(const Radius.circular(30.0)),
                 elevation: 5.0,
                 child: MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
                     //Implement registration functionality.
-                    Navigator.pushNamed(context, ChatScreen.id);
+                    try {
+                      final newUser = _auth.createUserWithEmailAndPassword(
+                          email: email, password: pass);
+                      if (newUser != null) {
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
+                    } on Exception catch (e) {
+                      print(e);
+                    }
                   },
                   minWidth: 200.0,
                   height: 42.0,
