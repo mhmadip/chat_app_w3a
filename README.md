@@ -3,9 +3,9 @@ Week 3 Chat App OOP2 (20 April 2022)
 
 Our goals for this week are:
 
-1- Activiate Chat Screen with some UI improvment for the chat conversation (This is done by using Firestore database to store chat details and Streams to reterive chat details into the Screen).
-2- Change Firestore Database Security Rules to not allow others messsing with our database then test these new rules.
-3- Add then show Progress Bar when user clicks ok Login and Register.
+- Activiate Chat Screen with some UI improvment for the chat conversation (This is done by using Firestore database to store chat details and Streams to reterive chat details into the Screen).
+- Change Firestore Database Security Rules to not allow others messsing with our database then test these new rules.
+- Add then show Progress Bar when user clicks ok Login and Register.
 
 
 
