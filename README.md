@@ -51,3 +51,110 @@ We’re going to build a modern messaging app where users can sign up and log in
 >This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
 
 ![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
+
+
+class _ChatScreenState extends State<ChatScreen> {
+//list of needed variables, put inside the _ChatScreenState
+final _auth = FirebaseAuth.instance;
+late User loggedInUser;
+late String messageText;
+final messageTextController = TextEditingController();
+final _firestore = FirebaseFirestore.instance;
+
+@override
+void initState() {
+// TODO: implement initState
+super.initState();
+getCurrentUser();
+}
+
+void getCurrentUser() async {
+try {
+final user = await _auth.currentUser;
+if (user != null) {
+loggedInUser = user;
+print(loggedInUser.email);
+}
+} catch (e) {
+print(e);
+}
+}
+
+@override
+Widget build(BuildContext context) {
+return Scaffold(
+appBar: AppBar(
+leading: null,
+actions: <Widget>[
+IconButton(
+icon: const Icon(Icons.close),
+onPressed: () async {
+//Implement logout functionality
+await _auth.signOut();
+Navigator.pop(context);
+}),
+],
+title: const Text('⚡️Chat'),
+backgroundColor: Colors.lightBlueAccent,
+),
+body: SafeArea(
+child: Column(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
+crossAxisAlignment: CrossAxisAlignment.stretch,
+children: <Widget>[
+StreamBuilder<QuerySnapshot>(
+stream: _firestore.collection('messages').snapshots(),
+builder: (context, snapshot) {
+if (!snapshot.hasData) {
+return const Center(
+child: CircularProgressIndicator(),
+);
+}
+final messages = snapshot.data?.docs;
+List<Text> messageWidgets = [];
+for (var message in messages!) {
+final messageText = message['text'];
+final messageSender = message['sender'];
+final messageWidget =
+Text('$messageText from $messageSender');
+messageWidgets.add(messageWidget);
+}
+return Column(
+children: messageWidgets,
+);
+}),
+Container(
+decoration: kMessageContainerDecoration,
+child: Row(
+crossAxisAlignment: CrossAxisAlignment.center,
+children: <Widget>[
+Expanded(
+child: TextField(
+onChanged: (value) {
+//Do something with the user input.
+messageText = value;
+},
+decoration: kMessageTextFieldDecoration,
+),
+),
+TextButton(
+onPressed: () {
+//Implement send functionality.
+messageTextController.clear();
+_firestore.collection('messages').add(
+{'sender': loggedInUser.email, 'text': messageText});
+},
+child: const Text(
+'Send',
+style: kSendButtonTextStyle,
+),
+),
+],
+),
+),
+],
+),
+),
+);
+}
+}
